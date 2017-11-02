@@ -60,7 +60,7 @@ export class NotesListComponent implements OnInit {
           this.speechData = value;
           const actionType = 'mic';
           const actionTitle = 'Speach';
-          
+
           console.log('actionTitle', actionTitle);
           console.log('actionType', actionType);
 

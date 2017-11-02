@@ -7,11 +7,13 @@ import { NewsPageComponent } from './items/news-page/news-page.component';
 import { NotesListComponent } from './notes/notes-list/notes-list.component';
 import { ReadmePageComponent } from './ui/readme-page/readme-page.component';
 import { CoreModule } from './core/core.module'
+import {UserProfileComponent} from './profile/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', component: ReadmePageComponent },
   { path: 'login', component: UserLoginComponent, },
   { path: 'items', component: NewsPageComponent, canActivate: [AuthGuard]},
+  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
   { path: 'notes', component: NotesListComponent,  canActivate: [AuthGuard] }
 ];
 

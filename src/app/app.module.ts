@@ -23,7 +23,7 @@ import { NotesModule } from './notes/notes.module'
 
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
-
+import { ProfileModule } from './profile/shared/profile.module'
 export const firebaseConfig = environment.firebaseConfig;
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FormsModule } from '@angular/forms';
@@ -41,6 +41,7 @@ import { ItemModule } from './items/shared/item.module';
     ItemModule,
     AppRoutingModule,
     CoreModule,
+    ProfileModule,
     SharedModule,
     UiModule,
     NotesModule,

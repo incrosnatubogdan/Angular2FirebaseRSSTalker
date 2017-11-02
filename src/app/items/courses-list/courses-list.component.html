@@ -1,4 +1,5 @@
 <ul>
+  <button (click)="filterBySize('test1')">test1</button>
   <div *ngFor="let course of coursesObservable | async">
 
 	 <a href="{{course.url}}" target="_blank" >
