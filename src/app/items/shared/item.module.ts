@@ -16,12 +16,12 @@ import {CoursesListComponent} from '../courses-list/courses-list.component';
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
-    AngularFireDatabaseModule
-y
-      declarations: [
+    AngularFireDatabaseModule,
+  ],
+    declarations: [
     CoursesListComponent,
     NewsPageComponent
-  ],
+    ],
   providers: [
     ItemService
   ]
