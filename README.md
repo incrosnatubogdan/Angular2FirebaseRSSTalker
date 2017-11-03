@@ -4,10 +4,6 @@
 
 FireStarter is designed to handle the basic features required by most Angular Firebase apps. It can serve as a foundation to learn this stack and roll out more complex features.
 
-- [Live Demo](https://firestarter-96e46.firebaseapp.com/)
-- [Lessons and Screencasts](https://angularfirebase.com)
-- [Join the Slack Team](https://join.slack.com/t/angularfirebase/shared_invite/enQtMjU2OTU5OTMyODM3LWU4YTZiMGFhZjJhYmEwYzI1MWFmYTgyMWRmOTI5NWZjYWE3NTMwZjFmNWMwZGI1MmMzODQ3OTFlZjFkMjc5N2Y)
-
 ## Features
 
 - Angular 4.4 + AngularFire5
@@ -22,8 +18,8 @@ FireStarter is designed to handle the basic features required by most Angular Fi
 
 Create an account at https://firebase.google.com/
 
-- `git clone https://github.com/codediodeio/angular-firestarter.git firestarter`
-- `cd firestarter`
+- `git clone https://github.com/incrosnatubogdan/Angular2FirebaseRSSTalker.git`
+- `cd Angular2FirebaseRSSTalker`
 - `npm install`
 
 Create the environment files below in `src/environments/`.
