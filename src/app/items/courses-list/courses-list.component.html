@@ -1,12 +1,8 @@
 <ul>
   <div class="scrollmenu">
-  <button (click)="filterBy('test')">test</button>
-    <button (click)="filterBy('test')">test</button>
-    <button (click)="filterBy('test')">test</button>
-    <button (click)="filterBy('test')">test</button>
-    <button (click)="filterBy('test')">test</button>
-    <button (click)="filterBy('test')">test</button>
-    <button (click)="filterBy('test')">test</button>
+    <select [(ngModel)]="category" (change)="pickCategory(category)">
+      <option *ngFor="let category of coursesObservable | async" value="{{category.title}}">{{ category.title }}</option>
+    </select>
   </div>
   <div *ngFor="let course of coursesObservable | async">
 

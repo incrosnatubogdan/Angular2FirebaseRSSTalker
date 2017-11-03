@@ -12,18 +12,20 @@ import {Subject} from 'rxjs/Subject';
   styleUrls: ['./courses-list.component.css']
 })
 export class CoursesListComponent implements OnInit {
-  coursesObservable: Observable<any[]>;
-  categorySubject = new Subject();
+  coursesObservable;
+  categorySubject = new Subject<any>();
 
   constructor(private db: AngularFireDatabase, public auth: AuthService) { }
   ngOnInit() {
-    this.coursesObservable = this.getCourses('/courses');
-  }
-  getCourses(listPath): Observable<any[]> {
-    return this.db.list(listPath).valueChanges();
-  }
-pickCategory (category: string) {
-  this.categorySubject.next(category);
+    this.coursesObservable = this.categorySubject.map(category => {
+      return this.db.list<any[]>('courses', ref  => {
+        return ref.orderByChild('category')
+          .equalTo(category))
+          .valueChanges();
+    });
 }
+    pickCategory (category: string) {
+      this.categorySubject.next(category);
+    }
 
 }
