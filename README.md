@@ -1,8 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Greenkeeper badge](https://badges.greenkeeper.io/incrosnatubogdan/Angular2FirebaseRSSTalker.svg)](https://greenkeeper.io/)
 
 # Personal Assistant - An Angular2 Cloud based personal assistant
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/incrosnatubogdan/Angular2FirebaseRSSTalker.svg)](https://greenkeeper.io/)
 
 FireStarter is designed to handle the basic features required by most Angular Firebase apps. It can serve as a foundation to learn this stack and roll out more complex features.
 
@@ -52,7 +51,3 @@ export const environment = {
 
 And finally `ng serve`
 
-## Apps Using FireStarter in Production
-
-- [ArtiFilter](https://app.artifilter.com) - Neural Art Generator
-- [FlashLawyer](https://flashlawyer.com) - Legal Document Builder and Chatbot
