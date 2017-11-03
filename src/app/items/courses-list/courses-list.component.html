@@ -1,8 +1,16 @@
 <ul>
-  <button (click)="filterBySize('test1')">test1</button>
+  <div class="scrollmenu">
+  <button (click)="filterBy('test')">test</button>
+    <button (click)="filterBy('test')">test</button>
+    <button (click)="filterBy('test')">test</button>
+    <button (click)="filterBy('test')">test</button>
+    <button (click)="filterBy('test')">test</button>
+    <button (click)="filterBy('test')">test</button>
+    <button (click)="filterBy('test')">test</button>
+  </div>
   <div *ngFor="let course of coursesObservable | async">
 
-	 <a href="{{course.url}}" target="_blank" >
+    <a href="{{course.url}}" target="_blank" >
       <h3>{{course.title}}</h3>
       <p>{{course.description}}</p>
        </a>

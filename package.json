@@ -15,7 +15,6 @@
   "dependencies": {
     "@angular/animations": "^4.4.3",
     "@angular/common": "^4.4.3",
-    "annyang": "^2.6.0",
     "@angular/compiler": "^4.4.3",
     "@angular/core": "^4.4.3",
     "@angular/forms": "^4.4.3",
@@ -25,8 +24,10 @@
     "@angular/platform-server": "^4.4.3",
     "@angular/router": "^4.4.3",
     "angularfire2": "^5.0.0-rc.3",
+    "annyang": "^2.6.0",
     "core-js": "^2.4.1",
     "firebase": "^4.4.0",
+    "instantsearch.js": "^2.2.2",
     "lodash": "^4.17.4",
     "rxjs": "^5.4.3",
     "zone.js": "^0.8.17"

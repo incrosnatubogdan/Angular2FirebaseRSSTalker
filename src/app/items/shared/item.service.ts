@@ -3,6 +3,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 import { Item } from './item';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class ItemService {
@@ -11,6 +12,7 @@ export class ItemService {
 
   itemsRef: AngularFireList<Item>;
   itemRef:  AngularFireObject<Item>;
+  category: BehaviorSubject<string|null>;
 
   items: Observable<Item[]>; //  list of objects
   item:  Observable<Item>;   //   single object
@@ -57,6 +59,10 @@ export class ItemService {
   // Deletes the entire list of items
   deleteAll(): void {
     this.itemsRef.remove()
+  }
+
+  filterBy(category: string|null) {
+    this.category.next(category);
   }
 
 
