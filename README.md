@@ -1,8 +1,6 @@
-[![Slack](https://firebasestorage.googleapis.com/v0/b/firestarter-96e46.appspot.com/o/assets%2Fslack-badge.svg?alt=media&token=3e68acef-3e00-4925-9710-e11cee5923e4)](https://join.slack.com/angularfirebase/shared_invite/MjA2NTgxMTI0MTk2LTE0OTg4NTQ4MDAtMjhhZDIzMjc0Mg)
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-# FireStarter - Angular + Firebase Progressive Web App
+# Personal Assistant - An Angular2 Cloud based personal assistant
 
 FireStarter is designed to handle the basic features required by most Angular Firebase apps. It can serve as a foundation to learn this stack and roll out more complex features.
 
