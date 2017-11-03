@@ -1,15 +1,15 @@
 <ul>
   <div class="scrollmenu">
-    <select [(ngModel)]="category" (change)="pickCategory(category)">
-      <option *ngFor="let category of coursesObservable | async" value="{{category.title}}">{{ category.title }}</option>
-    </select>
+    <button class="btn" type="button"><span>Button</span></button>
+    <button class="btn" type="button"><span>Button</span></button>
+    <button class="btn" type="button"><span>Button</span></button>
   </div>
   <div *ngFor="let course of coursesObservable | async">
 
     <a href="{{course.url}}" target="_blank" >
       <h3>{{course.title}}</h3>
       <p>{{course.description}}</p>
-       </a>
+    </a>
 
   </div>
 </ul>

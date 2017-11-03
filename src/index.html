@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Firestarter</title>
+  <title>Personal Assistant</title>
   <base href="/">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.min.css">
@@ -32,14 +32,11 @@
     if (!('serviceWorker' in navigator)) {
     } else {
       navigator.serviceWorker.register('/service-worker.js')
-
         .then((registration) = > {
-
         console.log('SW registered');
     })
     .
       catch((err) = > {
-
         console.log('SW error', err);
     })
       ;
