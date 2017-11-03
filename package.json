@@ -6,7 +6,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha",
+    "test": "mocha",
+    "cover": "istanbul cover _mocha",
 	"coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -16,7 +17,7 @@
   "dependencies": {
     "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",
-    "@angular/compiler": "4.4.6",
+    "@angular/compiler": "^4.0.0",
     "@angular/core": "^4.0.0",
     "@angular/forms": "^4.0.0",
     "@angular/http": "^4.0.0",
