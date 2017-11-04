@@ -1,6 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Greenkeeper badge](https://badges.greenkeeper.io/incrosnatubogdan/Angular2FirebaseRSSTalker.svg)](https://greenkeeper.io/)
-[![Coverage Status](https://coveralls.io/repos/incrosnatubogdan/Angular2FirebaseRSSTalker/badge.svg?branch=master)](https://coveralls.io/r/<incrosnatubogdan/Angular2FirebaseRSSTalker?branch=master)
+[![Build Status](https://travis-ci.org/incrosnatubogdan/Angular2FirebaseRSSTalker.svg?branch=master)](https://travis-ci.org/incrosnatubogdan/Angular2FirebaseRSSTalker)
 
 # Personal Assistant - An Angular2 Cloud based personal assistant
 
