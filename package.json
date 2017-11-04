@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "istanbul cover ./node_modules/.bin/_mocha",
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --recursive -R spec",
     "cover": "istanbul cover _mocha",
 	"coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "ng lint",
