@@ -1,14 +1,15 @@
 {
-  "name": "firestarter",
-  "version": "0.0.0",
+  "name": "Firebase",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --recursive -R spec",
+    "test": "./node_modules/jshint/bin/jshint hello.js",
     "cover": "./node_modules/.bin/istanbul cover _mocha",
-	"coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "coverage": "istanbul cover ./test.js",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "pwa": "ng build --prod && sw-precache --root=dist --config=precache-config.js"
@@ -30,6 +31,7 @@
     "core-js": "^2.4.1",
     "firebase": "^4.4.0",
     "instantsearch.js": "^2.2.2",
+    "jshint": "^2.9.5",
     "lodash": "^4.17.4",
     "mocha": "^4.0.1",
     "rxjs": "^5.4.3",
