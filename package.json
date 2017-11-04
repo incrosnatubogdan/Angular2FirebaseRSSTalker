@@ -7,7 +7,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --recursive -R spec",
-    "cover": "istanbul cover _mocha",
+    "cover": "./node_modules/.bin/istanbul cover _mocha",
 	"coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "ng lint",
     "e2e": "ng e2e",
