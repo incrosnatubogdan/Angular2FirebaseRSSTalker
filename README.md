@@ -24,6 +24,8 @@ Create an account at https://firebase.google.com/
 - `cd Angular2FirebaseRSSTalker`
 - `npm install`
 
+Working demo: https://licenta-rss.firebaseapp.com/items
+
 Create the environment files below in `src/environments/`.
 
 #### environment.ts
