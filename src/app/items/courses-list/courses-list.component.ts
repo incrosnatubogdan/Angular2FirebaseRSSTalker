@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
-import {AuthService} from '../../core/auth.service';
-import * as _ from 'lodash';
-import {Subject} from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/switchMap';
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -11,19 +12,20 @@ import {Subject} from 'rxjs/Subject';
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.css']
 })
-export class CoursesListComponent implements OnInit {
-  coursesObservable: Observable<any[]>;
-  categorySubject = new Subject();
+export class CoursesListComponent {
+  items$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
+  size$: BehaviorSubject<string|null>;
 
-  constructor(private db: AngularFireDatabase, public auth: AuthService) { }
-  ngOnInit() {
-    this.coursesObservable = this.getCourses('/courses');
+  constructor(db: AngularFireDatabase) {
+    this.size$ = new BehaviorSubject(null);
+    this.items$ = this.size$.switchMap(category =>
+      db.list('/courses', ref =>
+        category ? ref.orderByChild('category').equalTo(category) : ref
+      ).snapshotChanges()
+    );
   }
-  getCourses(listPath): Observable<any[]> {
-    return this.db.list(listPath).valueChanges();
+  filterBy(category: string|null) {
+    this.size$.next(category);
   }
-  pickCategory (category: string) {
-    this.categorySubject.next(category);
-  }
-
 }
+

@@ -9,14 +9,17 @@ import { ItemService } from './item.service';
 
 import {NewsPageComponent} from '../news-page/news-page.component';
 import {CoursesListComponent} from '../courses-list/courses-list.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {AngularFireModule} from 'angularfire2';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
+    BrowserModule,
     FormsModule,
-    AngularFireDatabaseModule,
+    AngularFireDatabaseModule
   ],
     declarations: [
     CoursesListComponent,

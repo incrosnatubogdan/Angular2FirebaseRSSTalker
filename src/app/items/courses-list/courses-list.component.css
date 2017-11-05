@@ -59,6 +59,10 @@ div.scrollmenu button:hover {
   padding: 0 24px;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .btn:before {
   content: "";
 

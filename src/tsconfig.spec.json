@@ -13,6 +13,9 @@
   "files": [
     "test.ts"
   ],
+  "types": [
+    "firebase"
+  ]
   "include": [
     "**/*.spec.ts"
   ]
