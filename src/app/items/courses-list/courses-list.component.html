@@ -1,15 +1,20 @@
 <ul>
   <div class="scrollmenu">
-    <button class="btn" type="button"><span>Button</span></button>
-    <button class="btn" type="button"><span>Button</span></button>
-    <button class="btn" type="button"><span>Button</span></button>
+    <button class="btn" (click)="filterBy('business')" type="button"><span>Business</span></button>
+    <button class="btn" (click)="filterBy('travel')" type="button"><span>Travel</span></button>
+    <button class="btn" (click)="filterBy('it')" type="button"><span>IT</span></button>
   </div>
-  <div *ngFor="let course of coursesObservable | async">
+  <div *ngIf="items$ | async; let items; else loading">
 
-    <a href="{{course.url}}" target="_blank" >
-      <h3>{{course.title}}</h3>
-      <p>{{course.description}}</p>
-    </a>
+      <li *ngFor="let item of items">
+        <a href="{{item.payload.val().url}}" target="_blank" >
+          <h3>{{ item.payload.val().title }}</h3>
+          <p>{{ item.payload.val().description }}</p>
+        </a>
+      </li>
 
+    <div *ngIf="items.length === 0">Niciun rezultat</div>
   </div>
+  <ng-template #loading>Loading&hellip;</ng-template>
 </ul>
+
