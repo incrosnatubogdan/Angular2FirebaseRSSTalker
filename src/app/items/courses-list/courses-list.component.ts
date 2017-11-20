@@ -1,11 +1,11 @@
-import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/switchMap';
 import * as firebase from 'firebase';
-import {SpeechService} from '../../shared/speech/speech.service';
+import { SpeechService } from '../../shared/speech/speech.service';
 
 
 @Component({
