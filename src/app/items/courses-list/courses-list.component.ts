@@ -38,7 +38,7 @@ export class CoursesListComponent {
     this.waitCommand = false;
     this.courseList.forEach(elem => elem.nativeElement.style.border = null);
 
-    Observable.of(...this.courseList.toArray())
+    const speaking = Observable.of(...this.courseList.toArray())
       .concatMap(elem => {
         elem.nativeElement.style.border = '1px solid red';
         const title = elem.nativeElement.querySelector('h3').textContent;
@@ -55,6 +55,8 @@ export class CoursesListComponent {
                   console.log(command);
                   if (command === 'read') {
                     this.speech.speak(description).subscribe(() => observer.complete() );
+                  } else if (command === 'stop') {
+                    speaking.unsubscribe();
                   } else {
                     observer.complete();
                   }
