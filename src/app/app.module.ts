@@ -16,6 +16,8 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module'
 
 // Feature Modules
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { ShareButtonsModule } from 'ngx-sharebuttons';
 
 import { UiModule } from './ui/shared/ui.module';
 import { NotesModule } from './notes/notes.module'
@@ -36,7 +38,10 @@ import { ItemModule } from './items/shared/item.module';
   ],
   imports: [
     BrowserModule,
+	HttpClientModule,             // (Required) for share counts
+    HttpClientJsonpModule, 
     HttpModule,
+	ShareButtonsModule.forRoot(),
     FormsModule,
     ItemModule,
     AppRoutingModule,
