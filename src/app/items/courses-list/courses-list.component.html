@@ -16,6 +16,7 @@
 
     <div *ngIf="items.length === 0">Niciun rezultat</div>
   </div>
+  <div [hidden]="!waitCommand">Waiting voice commands, say 'read more' to repeat</div>
   <ng-template #loading>Loading&hellip;</ng-template>
 </ul>
 
