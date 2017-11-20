@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -13,7 +13,7 @@ import { SpeechService } from '../../shared/speech/speech.service';
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.css']
 })
-export class CoursesListComponent implements OnDestroy {
+export class CoursesListComponent {
   @ViewChildren('courseList') courseList: QueryList<any>;
 
   items$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
@@ -77,4 +77,3 @@ export class CoursesListComponent implements OnDestroy {
     )
   }
 }
-
