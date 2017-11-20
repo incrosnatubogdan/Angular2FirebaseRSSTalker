@@ -5,8 +5,9 @@
     <button class="btn" (click)="filterBy('it')" type="button"><span>IT</span></button>
   </div>
   <div *ngIf="items$ | async; let items; else loading">
+      <button class="btn" (click)="startSpeaking()" type="button">Speak!!!</button>
 
-      <li *ngFor="let item of items">
+      <li *ngFor="let item of items" #courseList>
         <a href="{{item.payload.val().url}}" target="_blank" >
           <h3>{{ item.payload.val().title }}</h3>
           <p>{{ item.payload.val().description }}</p>

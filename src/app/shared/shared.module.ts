@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LoadingSpinnerComponent } from '../ui/loading-spinner/loading-spinner.component';
+import { SpeechService } from './speech/speech.service';
 
 
 @NgModule({
@@ -13,6 +14,9 @@ import { LoadingSpinnerComponent } from '../ui/loading-spinner/loading-spinner.c
   ],
   exports: [
     LoadingSpinnerComponent
-  ]
+  ],
+  providers: [
+    SpeechService
+  ],
 })
 export class SharedModule { }
