@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 interface IWindow extends Window {
@@ -13,7 +13,7 @@ export class SpeechService {
   speechSynthesis: any;
   speechRecognition: any;
 
-  constructor() { }
+  constructor(private zone: NgZone) { }
 
   speak(text: string): Observable<any> {
     return Observable.create(observer => {
