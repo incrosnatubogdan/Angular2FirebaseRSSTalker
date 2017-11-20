@@ -24,7 +24,7 @@ export class CoursesListComponent {
     this.waitCommand = false;
     this.size$ = new BehaviorSubject(null);
     this.items$ = this.size$.switchMap(category =>
-      db.list('/courses', ref =>
+      db.list('/rss', ref =>
         category ? ref.orderByChild('category').equalTo(category) : ref
       ).snapshotChanges()
     );
@@ -39,41 +39,34 @@ export class CoursesListComponent {
     this.courseList.forEach(elem => elem.nativeElement.style.border = null);
 
     Observable.of(...this.courseList.toArray())
-      .concatMap(text => {
-        text.nativeElement.style.border = '1px solid red';
-        return this.speech.speak(text.nativeElement.textContent);
+      .concatMap(elem => {
+        elem.nativeElement.style.border = '1px solid red';
+        const title = elem.nativeElement.querySelector('h3').textContent;
+        const description = elem.nativeElement.querySelector('p').textContent;
+        return Observable.create(observer => {
+          this.speech.speak(title)
+            .subscribe(() => {
+              observer.next();
+              this.waitCommand = true;
+              this.speech.record().timeout(4000).subscribe(
+                event => {
+                  const command = event.results[0][0].transcript;
+                  this.waitCommand = false;
+                  console.log(command);
+                  if (command === 'read') {
+                    this.speech.speak(description).subscribe(() => observer.complete() );
+                  } else {
+                    observer.complete();
+                  }
+                },
+                error => {
+                  this.waitCommand = false;
+                  observer.complete();
+                }
+              )
+            });
+        });
       })
-      .subscribe(
-        (next) => console.log('next'),
-        (error) => console.log(error),
-        () => {
-          this.startRecording();
-        }
-      );
-  }
-
-  startRecording() {
-    this.waitCommand = true;
-
-    this.speech.record().subscribe(
-      event => {
-        const command = event.results[0][0].transcript;
-        console.log(command);
-        if (command === 'read more') {
-          this.startSpeaking();
-        } else {
-          this.waitCommand = false;
-        }
-      },
-      error => {
-        console.log(error);
-        if (error === 'no-speech') {
-          this.startRecording();
-        }
-      },
-      () => {
-        this.waitCommand = false;
-      }
-    )
+      .subscribe(() => this.waitCommand = false);
   }
 }
