@@ -24,7 +24,7 @@ export class CoursesListComponent {
     this.waitCommand = false;
     this.size$ = new BehaviorSubject(null);
     this.items$ = this.size$.switchMap(category =>
-      db.list('/courses', ref =>
+      db.list('/rss', ref =>
         category ? ref.orderByChild('category').equalTo(category) : ref
       ).snapshotChanges()
     );
