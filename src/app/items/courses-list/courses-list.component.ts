@@ -48,12 +48,12 @@ export class CoursesListComponent {
             .subscribe(() => {
               observer.next();
               this.waitCommand = true;
-              this.speech.record().timeout(4000).subscribe(
+              this.speech.record().timeout(7000).subscribe(
                 event => {
                   const command = event.results[0][0].transcript;
                   this.waitCommand = false;
                   console.log(command);
-                  if (command === 'read') {
+                  if (command === 'more') {
                     this.speech.speak(description).subscribe(() => observer.complete() );
                   } else {
                     observer.complete();
