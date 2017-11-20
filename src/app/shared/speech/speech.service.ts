@@ -29,7 +29,7 @@ export class SpeechService {
     });
   }
 
-  record(): Observable<string> {
+  record(): Observable<any> {
     return Observable.create(observer => {
       const { webkitSpeechRecognition }: IWindow = <IWindow>window;
       const speechRecognition = new webkitSpeechRecognition();
