@@ -13,6 +13,11 @@
   transition: background-color .3s;
 }
 
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .btn:hover, .btn:focus {
   background-color: #27ae60;
 }

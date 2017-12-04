@@ -7,7 +7,10 @@
         <button class="button" (click)="logout()">Logout</button>
 
    </div>
+    <input [(ngModel)]="content" placeholder="Add your own note" class="input">
 
+
+    <button class="button is-success" (click)="createItem" [disabled]="content?.length < 2 || content?.length > 200">
     <!-- User NOT logged in -->
     <div class="box" *ngIf="!auth.currentUser">
         <h3>Howdy, {{ auth.currentUserDisplayName }}</h3>

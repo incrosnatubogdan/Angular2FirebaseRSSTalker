@@ -23,22 +23,22 @@ export class CoursesListComponent {
   constructor(db: AngularFireDatabase, private speech: SpeechService) {
     this.waitCommand = false;
     this.size$ = new BehaviorSubject(null);
-    this.items$ = this.size$.switchMap(category =>
+    this.items$ = this.size$.switchMap(Title =>
       db.list('/rss', ref =>
-        category ? ref.orderByChild('category').equalTo(category) : ref
+        Title ? ref.orderByChild('Title').equalTo(Title) : ref
       ).snapshotChanges()
     );
   }
 
-  filterBy(category: string|null) {
-    this.size$.next(category);
+  filterBy(Title: string|null) {
+    this.size$.next(Title);
   }
 
   startSpeaking() {
     this.waitCommand = false;
     this.courseList.forEach(elem => elem.nativeElement.style.border = null);
 
-    Observable.of(...this.courseList.toArray())
+    const speaking = Observable.of(...this.courseList.toArray())
       .concatMap(elem => {
         elem.nativeElement.style.border = '1px solid red';
         const title = elem.nativeElement.querySelector('h3').textContent;
@@ -48,13 +48,15 @@ export class CoursesListComponent {
             .subscribe(() => {
               observer.next();
               this.waitCommand = true;
-              this.speech.record().timeout(7000).subscribe(
+              this.speech.record().timeout(4000).subscribe(
                 event => {
                   const command = event.results[0][0].transcript;
                   this.waitCommand = false;
                   console.log(command);
                   if (command === 'more') {
                     this.speech.speak(description).subscribe(() => observer.complete() );
+                  } else if (command === 'stop') {
+                    speaking.unsubscribe();
                   } else {
                     observer.complete();
                   }
@@ -69,4 +71,5 @@ export class CoursesListComponent {
       })
       .subscribe(() => this.waitCommand = false);
   }
+
 }
