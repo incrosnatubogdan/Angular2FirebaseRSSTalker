@@ -11,8 +11,6 @@ import {NewsPageComponent} from '../news-page/news-page.component';
 import {CoursesListComponent} from '../courses-list/courses-list.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {AngularFireModule} from 'angularfire2';
-import {ShareButtonsModule} from "ngx-sharebuttons";
-import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   imports: [
@@ -21,8 +19,6 @@ import {HttpClientModule} from "@angular/common/http";
     ReactiveFormsModule,
     BrowserModule,
     FormsModule,
-	HttpClientModule, 
-	ShareButtonsModule.forRoot(),
     AngularFireDatabaseModule
   ],
     declarations: [

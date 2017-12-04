@@ -53,7 +53,7 @@ export class CoursesListComponent {
                   const command = event.results[0][0].transcript;
                   this.waitCommand = false;
                   console.log(command);
-                  if (command === 'more') {
+                  if (command === 'read') {
                     this.speech.speak(description).subscribe(() => observer.complete() );
                   } else if (command === 'stop') {
                     speaking.unsubscribe();
