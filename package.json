@@ -24,7 +24,7 @@
     "@angular/http": "^4.4.3",
     "@angular/platform-browser": "^4.4.3",
     "@angular/platform-browser-dynamic": "^4.4.3",
-    "@angular/platform-server": "^4.4.3",
+    "@angular/platform-server": "^5.1.3",
     "@angular/router": "^4.4.3",
     "angularfire2": "^5.0.0-rc.3",
     "annyang": "^2.6.0",
