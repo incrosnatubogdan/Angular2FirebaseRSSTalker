@@ -3,6 +3,7 @@
     "name": "Personal Assistant",
     "start_url": "/",
 
+    "gcm_sender_id": "103953800507"
     "theme_color": "#f48c5b",
     "background_color": "#ffffff",
 

@@ -1,11 +1,9 @@
-<h1>Firestore Notes</h1>
-<p>This is a very basic demo of the Firestore database.</p>
+<h1>News Preferences</h1>
+<p>Here you can set your news preferences</p>
 
-<input [(ngModel)]="content" placeholder="Add your own note" class="input">
-
-
-<button class="button is-success" (click)="createNote()" [disabled]="content?.length < 2 || content?.length > 200">
-  Add Note
+<input [(ngModel)]="content" placeholder="Add your own preference" class="input">
+<button class="button is-success" (click)="createNote()" [disabled]="content?.length < 2 || content?.length > 30">
+  Add Preference
 </button>
 <hr>
 <div *ngFor="let note of notes | async">

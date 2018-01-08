@@ -1,26 +1,28 @@
 <ul>
-<<<<<<< HEAD
    <div class="scrollmenu">
     <button class="btn" (click)="filterBy('')" type="button"><span>All</span></button>
-    <button class="btn" (click)="filterBy('South')" type="button"><span>News</span></button>
-    <button class="btn" (click)="filterBy('Pope')" type="button"><span>Politic</span></button>
+    <button class="btn" (click)="filterBy('news')" type="button"><span>News</span></button>
+    <button class="btn" (click)="filterBy('politic')" type="button"><span>Politic</span></button>
     <button class="btn" (click)="filterBy('sanatate')" type="button"><span>Sanatate</span></button>
-=======
-  <div class="scrollmenu">
-    <button class="btn" (click)="filterBy('business')" type="button"><span>Business</span></button>
-    <button class="btn" (click)="filterBy('travel')" type="button"><span>Travel</span></button>
->>>>>>> parent of 9996341... added all the missing files
     <button class="btn" (click)="filterBy('it')" type="button"><span>IT</span></button>
+    <button class="btn" (click)="filterBy('sport')" type="button"><span>Sport</span></button>
+    <button class="btn" (click)="filterBy('monden')" type="button"><span>Monden</span></button>
+    <button class="btn" (click)="filterBy('life')" type="button"><span>Life</span></button>
   </div>
   <div *ngIf="items$ | async; let items; else loading">
-      <button class="btn" (click)="startSpeaking()" type="button">Speak!!!</button>
-      <div [hidden]="!waitCommand">Waiting voice commands, say 'read more' to repeat</div>
+      <button class="btn" (click)="startSpeaking()" type="button"><i class="fa fa-microphone" aria-hidden="true">Speak</i></button>
+      <div [hidden]="!waitCommand">Waiting voice commands, say 'more'</div>
 
       <li *ngFor="let item of items" #courseList>
-        <a href="{{item.payload.val().Link}}" target="_blank" >
-          <h3>{{ item.payload.val().Title }}</h3>
-          <p>{{ item.payload.val().Description }}</p>
-        </a>
+       <div class="card">
+      <div class="container">
+          <a href="{{item.payload.val().Link}}" target="_blank" >
+            <h3>{{ item.payload.val().Title }}</h3>
+            <p>{{ item.payload.val().Description }}</p>
+          </a>
+        <share-buttons [include]="['facebook', 'twitter', 'whatsapp']" [url]="item.payload.val().Link"></share-buttons>
+      </div>
+    </div>
       </li>
 
     <div *ngIf="items.length === 0">Niciun rezultat</div>

@@ -1,12 +1,29 @@
-<nav class="nav" padding-left="8vw">
-  <div class="nav-left">
-    <a class="nav-item logo" routerLink="/" >Personal
-      <img src="assets/images/logo.png" width="30px" margin-right="0px"  alt="Firestarter Angular4 Demo App"/> Assistant
-    </a>
+<div class ="top">
+<nav role="navigation">
+  <div id="menuToggle">
+    <input type="checkbox" />
+    <span></span>
+    <span></span>
+    <span></span>
+    <ul id="menu">
+      <div *ngIf="auth.currentUser">
+        <a routerLink="/items">
+          <li>News</li>
+        </a>
+        <a routerLink="/notes">
+          <li>Watchlist</li>
+        </a>
+        <a routerLink="/profile">
+          <li>Profile</li>
+        </a>
+        <a (click)="logout()">Logout</a>
+      </div>
+      <div *ngIf="!auth.currentUser">
+        <a routerLink="/login">
+          <li>Login</li>
+        </a>
+      </div>
+    </ul>
   </div>
-
-  <!-- This "nav-toggle" hamburger menu is only visible on mobile -->
-  <!-- You need JavaScript to toggle the "is-active" class on "nav-menu" -->
-
-
 </nav>
+</div>
