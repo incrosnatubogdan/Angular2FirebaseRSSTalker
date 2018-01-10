@@ -7,16 +7,15 @@
     <span></span>
     <ul id="menu">
       <div *ngIf="auth.currentUser">
+        <img class="card-img-top" [src]="auth.currentUser.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" width=10%>
+        <a>{{ auth.currentUserDisplayName }}</a>
         <a routerLink="/items">
           <li>News</li>
         </a>
         <a routerLink="/notes">
           <li>Watchlist</li>
         </a>
-        <a routerLink="/profile">
-          <li>Profile</li>
-        </a>
-        <a (click)="logout()">Logout</a>
+        <a (click)="logout()"><li>Logout</li></a>
       </div>
       <div *ngIf="!auth.currentUser">
         <a routerLink="/login">
