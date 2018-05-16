@@ -10,7 +10,7 @@
     <button class="btn" (click)="filterBy('life')" type="button"><span>Life</span></button>
   </div>
   <div *ngIf="items$ | async; let items; else loading">
-      <button class="btn" (click)="startSpeaking()" type="button"><i class="fa fa-microphone" aria-hidden="true">Speak</i></button>
+      <button class="btn" style="margin:2% auto 2% auto; background: #E8C547; " (click)="startSpeaking()" type="button"><i class="fa fa-microphone" aria-hidden="true"> Speak</i></button>
       <div [hidden]="!waitCommand">Waiting voice commands, say 'more'</div>
 
       <li *ngFor="let item of items" #courseList>

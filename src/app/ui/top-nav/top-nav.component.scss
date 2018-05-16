@@ -1,6 +1,6 @@
 .top{
   height: 40px;
-  background: #364F6B;
+  background: #E8C547;
   position: fixed;
   z-index: 20;
   width: 100%;
@@ -11,7 +11,7 @@
 
 nav {
   top:0;
-  padding: 0 5vw;
+  padding: 0 1%;
   padding-right: 60px;
 
   .nav-item {
@@ -123,12 +123,12 @@ a:hover
 #menu
 {
   position: absolute;
-  width: 800px;
+  width: 55vh;
   margin: -100px 0 0 -50px;
   padding: 50px;
   padding-top: 125px;
 
-  background: #3FC1C9;
+  background: #E8C547;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */
