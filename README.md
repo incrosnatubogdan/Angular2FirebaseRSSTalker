@@ -24,6 +24,16 @@ Create an account at https://firebase.google.com/
 - `cd Angular2FirebaseRSSTalker`
 - `npm install`
 
+## Deploy to Firebase
+
+Create an account at https://firebase.google.com/
+
+- `ng build`
+- `firebase login`
+- `firebase init`
+- `Open firebase.json and change public to /dist folder`
+- `firebase deploy`
+
 Working demo: https://licenta-rss.firebaseapp.com/items
 
 Create the environment files below in `src/environments/`.
