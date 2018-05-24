@@ -1,27 +1,34 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+
+
 import { NoteService } from './note.service';
 
-import { NotesListComponent } from './notes-list/notes-list.component';
-import { NoteDetailComponent } from './note-detail/note-detail.component';
+import {NotesListComponent} from './notes-list/notes-list.component';
 
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-
+import {BrowserModule} from '@angular/platform-browser';
+import {AngularFireModule} from 'angularfire2';
+import {ShareButtonsModule} from 'ngx-sharebuttons';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    BrowserModule,
     FormsModule,
-    SharedModule,
-    AngularFirestoreModule.enablePersistence(),
+    HttpClientModule,
+    ShareButtonsModule.forRoot(),
+    AngularFireDatabaseModule
   ],
   declarations: [
-    NotesListComponent,
-    NoteDetailComponent
+    NotesListComponent
   ],
   providers: [
-    NoteService]
+    NoteService
+  ]
 })
 export class NotesModule { }

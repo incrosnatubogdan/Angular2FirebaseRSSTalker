@@ -1,13 +1,33 @@
-<h1 style="margin: 2% 0 0 0;">News Preferences</h1>
-<p>Here you can set your news preferences</p>
+<ul>
+  <h3 style="text-align: center; margin-top: 5%;">Your favorite News</h3>
+  <div class="scrollmenu">
+    <button class="btn" (click)="filterBy('')" type="button"><span>All</span></button>
+    <button class="btn" (click)="filterBy('news')" type="button"><span>News</span></button>
+    <button class="btn" (click)="filterBy('politic')" type="button"><span>Politic</span></button>
+    <button class="btn" (click)="filterBy('health')" type="button"><span>Sanatate</span></button>
+    <button class="btn" (click)="filterBy('IT')" type="button"><span>IT</span></button>
+    <button class="btn" (click)="filterBy('sport')" type="button"><span>Sport</span></button>
+    <button class="btn" (click)="filterBy('monden')" type="button"><span>Monden</span></button>
+    <button class="btn" (click)="filterBy('life')" type="button"><span>Life</span></button>
+  </div>
+  <div *ngIf="items$ | async; let items; else loading">
+    <button class="btn" style="margin:2% auto 2% auto; background: #E8C547; " (click)="startSpeaking()" type="button"><i class="fa fa-microphone" aria-hidden="true"> Speak</i></button>
+    <button [disabled]="waitCommand" class="btn" style="margin:2% auto 2% auto; background: #E8C547; " (click)="speech.abort()" type="button"><i class="fa fa-microphone" aria-hidden="true"> Stop</i></button>
+    <div [hidden]="!waitCommand">Waiting voice commands, say 'more' or 'stop'</div>
 
-<input [(ngModel)]="content" placeholder="Add your own preference" class="input">
-<button class="button is-success" (click)="createNote()" [disabled]="content?.length < 2 || content?.length > 30">
-  Add Preference
-</button>
-<hr>
-<div *ngFor="let note of notes | async">
-  <note-detail [note]="note"></note-detail>
-</div>
+    <li *ngFor="let item of items" #courseList>
+      <div class="card">
+        <div class="container">
+          <a href="{{item.payload.val().Link}}" target="_blank">
+            <h3>{{ item.payload.val().Title }}</h3>
+            <p>{{ item.payload.val().Description }}</p>
+          </a>
+          <share-buttons [include]="['facebook', 'twitter', 'whatsapp']" [url]="item.payload.val().Link"></share-buttons>
+        </div>
+      </div>
+    </li>
 
-
+    <div *ngIf="items.length === 0">Niciun rezultat</div>
+  </div>
+  <ng-template #loading>Loading&hellip;</ng-template>
+</ul>

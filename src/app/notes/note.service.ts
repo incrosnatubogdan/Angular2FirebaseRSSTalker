@@ -1,58 +1,73 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
+import { Item } from './item';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-
-interface Note {
-  content: string;
-  hearts?: number;
-  id?: any;
-  time?: number;
-}
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class NoteService {
 
-  notesCollection: AngularFirestoreCollection<Note>;
-  noteDocument:   AngularFirestoreDocument<Node>
+  private basePath = '/items';
 
-  constructor(private afs: AngularFirestore) {
-    this.notesCollection = this.afs.collection('notes', ref => ref.orderBy('time', 'desc').limit(5) )
-    // this.noteDocument = this.afs.doc('notes/mtp1Ll6caN4dVrhg8fWD');
+  itemsRef: AngularFireList<Item>;
+  itemRef:  AngularFireObject<Item>;
+  category: BehaviorSubject<string|null>;
+
+  items: Observable<Item[]>; //  list of objects
+  item:  Observable<Item>;   //   single object
+
+
+  constructor(private db: AngularFireDatabase) {
+    this.itemsRef = db.list('/items')
   }
 
-  getData(): Observable<Note[]> {
-    return this.notesCollection.valueChanges();
-  }
-
-  getSnapshot() {
-    // ['added', 'modified', 'removed']
-    return this.notesCollection.snapshotChanges().map(actions => {
-      return actions.map(a => {
-        return { id: a.payload.doc.id, ...a.payload.doc.data() }
-      })
+  // Return an observable list with optional query
+  // You will usually call this from OnInit in a component
+  getItemsList(query?) {
+    // const itemsRef = afDb.list('/items')
+    // return this.itemsRef.valueChanges()
+    return this.itemsRef.snapshotChanges().map(arr => {
+      return arr.map(snap => Object.assign(snap.payload.val(), { $key: snap.key }) )
     })
   }
 
-  getNote(id) {
-    return this.afs.doc<Note>('notes/' + id);
+
+  // Return a single observable item
+  getItem(key: string): Observable<Item> {
+    const itemPath = `${this.basePath}/${key}`;
+    this.item = this.db.object(itemPath).valueChanges();
+    return this.item
   }
 
-  create(content: string) {
-    const note: Note = {
-      content: content,
-      hearts: 0,
-      time: new Date().getTime()
-    }
-    return this.notesCollection.add(note);
+  // Create a bramd new item
+  createItem(item: Item): void {
+    this.itemsRef.push(item)
   }
 
-  updateNote(id, data) {
-    return this.getNote(id).update(data)
+
+  // Update an exisiting item
+  updateItem(key: string, value: any): void {
+    this.itemsRef.update(key, value)
   }
 
-  deleteNote(id) {
-    return this.getNote(id).delete()
+  // Deletes a single item
+  deleteItem(key: string): void {
+    this.itemsRef.remove(key)
+  }
+
+  // Deletes the entire list of items
+  deleteAll(): void {
+    this.itemsRef.remove()
+  }
+
+  filterBy(category: string|null) {
+    this.category.next(category);
+  }
+
+
+  // Default error handling for all actions
+  private handleError(error) {
+    console.log(error)
   }
 
 
