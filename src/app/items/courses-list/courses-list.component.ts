@@ -34,6 +34,15 @@ export class CoursesListComponent {
     this.size$.next(Category);
   }
 
+  stopSpeaking() {
+  this.waitCommand = false;
+   this.courseList.forEach(elem => elem.nativeElement.style.border = null);
+  }
+
+  abort() {
+    this.listening = false;
+  }
+
   startSpeaking() {
     this.waitCommand = false;
     this.courseList.forEach(elem => elem.nativeElement.style.border = null);
