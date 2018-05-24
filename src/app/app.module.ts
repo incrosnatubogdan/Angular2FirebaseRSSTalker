@@ -39,7 +39,7 @@ import { ItemModule } from './items/shared/item.module';
   imports: [
     BrowserModule,
 	HttpClientModule,             // (Required) for share counts
-    HttpClientJsonpModule, 
+    HttpClientJsonpModule,
     HttpModule,
 	ShareButtonsModule.forRoot(),
     FormsModule,
