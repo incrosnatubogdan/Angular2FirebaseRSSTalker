@@ -8,7 +8,7 @@
     <ul id="menu">
       <div *ngIf="auth.currentUser">
         <img class="card-img-top" [src]="auth.currentUser.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" width=10%>
-        <a style="margin: 50% 0 50% 0;">{{ auth.currentUserDisplayName }}</a>
+        <a>{{ auth.currentUserDisplayName }}</a>
         <a routerLink="/items">
           <li>News</li>
         </a>

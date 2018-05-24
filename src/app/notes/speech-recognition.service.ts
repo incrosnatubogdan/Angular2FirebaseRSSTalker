@@ -23,7 +23,7 @@ export class SpeechRecognitionService {
       // this.speechRecognition.continuous = true;
       this.speechRecognition.continuous = false;
       this.speechRecognition.interimResults = false;
-      this.speechRecognition.lang = 'en-AU';
+      this.speechRecognition.lang = 'en-us';
       this.speechRecognition.maxAlternatives = 1;
 
       this.speechRecognition.onresult = speech => {
@@ -32,12 +32,12 @@ export class SpeechRecognitionService {
           var result = speech.results[speech.resultIndex];
           var transcript = result[0].transcript;
           if (result.isFinal) {
-            if (result[0].confidence < 0.2) {
+            if (result[0].confidence < 0.3) {
               console.log("Unrecognized result - Please try again");
             }
             else {
               term = _.trim(transcript);
-              console.log("Did you say? -> " + term);
+              console.log("Did you said? -> " + term);
             }
           }
         }

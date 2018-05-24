@@ -1,4 +1,4 @@
-<div *ngIf="!auth.currentUser; else login">
+<div *ngIf="!auth.currentUser; else alreadyLoggedIn">
 
   <h3 style="margin: 2% 0 2% 0;">Social Login</h3>
 
@@ -30,7 +30,7 @@
 
 
 <ng-template #alreadyLoggedIn>
-  <p style="margin-top: 2%;" class="text-success">
+  <p class="text-success">
     Already logged in!
   </p>
 </ng-template>

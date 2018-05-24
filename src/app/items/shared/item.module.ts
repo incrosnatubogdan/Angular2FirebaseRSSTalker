@@ -13,7 +13,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AngularFireModule} from 'angularfire2';
 import {ShareButtonsModule} from "ngx-sharebuttons";
 import {HttpClientModule} from "@angular/common/http";
-import {SpeechRecognitionService} from './speech-recognition.service';
 
 @NgModule({
   imports: [
@@ -31,8 +30,7 @@ import {SpeechRecognitionService} from './speech-recognition.service';
     NewsPageComponent
     ],
   providers: [
-    ItemService,
-    SpeechRecognitionService
+    ItemService
   ]
 })
 export class ItemModule { }

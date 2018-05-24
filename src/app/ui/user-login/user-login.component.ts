@@ -53,7 +53,7 @@ export class UserLoginComponent implements OnInit {
 
   private afterSignIn(): void {
     // Do after login stuff here, such router redirects, toast messages, etc.
-    this.router.navigate(['/items']);
+    this.router.navigate(['/']);
   }
 
 }
