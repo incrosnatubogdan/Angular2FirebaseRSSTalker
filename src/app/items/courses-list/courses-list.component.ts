@@ -23,15 +23,15 @@ export class CoursesListComponent {
   constructor(db: AngularFireDatabase, private speech: SpeechService) {
     this.waitCommand = false;
     this.size$ = new BehaviorSubject(null);
-    this.items$ = this.size$.switchMap(category =>
+    this.items$ = this.size$.switchMap(Category =>
       db.list('/rss', ref =>
-        category ? ref.orderByChild('category').equalTo(category) : ref
+        Category ? ref.orderByChild('Category').equalTo(Category) : ref
       ).snapshotChanges()
     );
   }
 
-  filterBy(category: string|null) {
-    this.size$.next(category);
+  filterBy(Category: string|null) {
+    this.size$.next(Category);
   }
 
   startSpeaking() {
@@ -40,7 +40,7 @@ export class CoursesListComponent {
 
     Observable.of(...this.courseList.toArray())
       .concatMap(elem => {
-        elem.nativeElement.style.border = '1px solid red';
+        elem.nativeElement.style.border = '3px groove rgba(65, 109, 234, 0.5)';
         const title = elem.nativeElement.querySelector('h3').textContent;
         const description = elem.nativeElement.querySelector('p').textContent;
         return Observable.create(observer => {
@@ -48,14 +48,19 @@ export class CoursesListComponent {
             .subscribe(() => {
               observer.next();
               this.waitCommand = true;
+
               this.speech.record().timeout(7000).subscribe(
                 event => {
                   const command = event.results[0][0].transcript;
                   this.waitCommand = false;
-                  console.log(command);
+                  console.log('User may have said:', command);
                   if (command === 'more') {
                     this.speech.speak(description).subscribe(() => observer.complete() );
-                  } else {
+                  }
+                  else if (command === 'stop') {
+                    this.waitCommand = true;
+                  }
+                  else {
                     observer.complete();
                   }
                 },
@@ -69,4 +74,5 @@ export class CoursesListComponent {
       })
       .subscribe(() => this.waitCommand = false);
   }
+
 }

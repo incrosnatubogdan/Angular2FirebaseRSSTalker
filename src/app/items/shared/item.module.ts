@@ -11,8 +11,9 @@ import {NewsPageComponent} from '../news-page/news-page.component';
 import {CoursesListComponent} from '../courses-list/courses-list.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {AngularFireModule} from 'angularfire2';
-import {ShareButtonsModule} from "ngx-sharebuttons";
-import {HttpClientModule} from "@angular/common/http";
+import {ShareButtonsModule} from 'ngx-sharebuttons';
+import {HttpClientModule} from '@angular/common/http';
+import {SpeechService} from '../../shared/speech/speech.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import {HttpClientModule} from "@angular/common/http";
     ReactiveFormsModule,
     BrowserModule,
     FormsModule,
-	HttpClientModule, 
+	HttpClientModule,
 	ShareButtonsModule.forRoot(),
     AngularFireDatabaseModule
   ],
@@ -30,7 +31,8 @@ import {HttpClientModule} from "@angular/common/http";
     NewsPageComponent
     ],
   providers: [
-    ItemService
+    ItemService,
+    SpeechService
   ]
 })
 export class ItemModule { }

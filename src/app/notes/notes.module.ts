@@ -8,7 +8,7 @@ import { NotesListComponent } from './notes-list/notes-list.component';
 import { NoteDetailComponent } from './note-detail/note-detail.component';
 
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import {SpeechRecognitionService} from './speech-recognition.service';
+
 
 @NgModule({
   imports: [
@@ -22,7 +22,6 @@ import {SpeechRecognitionService} from './speech-recognition.service';
     NoteDetailComponent
   ],
   providers: [
-    NoteService,
-    SpeechRecognitionService]
+    NoteService]
 })
 export class NotesModule { }
