@@ -3,9 +3,11 @@ import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/concatMap'
 import 'rxjs/add/operator/switchMap';
 import * as firebase from 'firebase';
 import { SpeechService } from '../../shared/speech/speech.service';
+import 'rxjs/add/operator/timeout';
 
 
 @Component({
@@ -28,6 +30,10 @@ export class CoursesListComponent {
         Category ? ref.orderByChild('Category').equalTo(Category) : ref
       ).snapshotChanges()
     );
+  }
+
+  stopSpeaking() {
+    this.waitCommand = true;
   }
 
   filterBy(Category: string|null) {

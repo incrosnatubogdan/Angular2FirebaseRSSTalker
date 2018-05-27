@@ -10,10 +10,12 @@
         <button class="btn" (click)="filterBy('life')" type="button"><span>Life</span></button>
     </div>
     <div *ngIf="items$ | async; let items; else loading">
+      <div class="scrollmenu">
         <button class="btn" style="margin:2% auto 2% auto; background: #E8C547; " (click)="startSpeaking()" type="button"><i class="fa fa-microphone" aria-hidden="true"> Speak</i></button>
-        <button [disabled]="waitCommand" class="btn" style="margin:2% auto 2% auto; background: #E8C547; " (click)="speech.abort()" type="button"><i class="fa fa-microphone" aria-hidden="true"> Stop</i></button>
-        <div [hidden]="!waitCommand">Waiting voice commands, say 'more' or 'stop'</div>
+        <button [disabled]="waitCommand" class="btn" style="margin:2% auto 2% auto; background: #E8C547; " (click)="stopSpeaking()" type="button"><i class="fa fa-stop-circle" aria-hidden="true"> Stop</i></button>
 
+        <div [hidden]="!waitCommand">Waiting voice commands, say 'more' or 'stop'</div>
+      </div>
         <li *ngFor="let item of items" #courseList>
             <div class="card">
                 <div class="container">

@@ -23,14 +23,14 @@ export class NotesListComponent{
   constructor(db: AngularFireDatabase) {
 
     this.size$ = new BehaviorSubject(null);
-    this.items$ = this.size$.switchMap(Category =>
+    this.items$ = this.size$.switchMap(Title =>
       db.list('/rss', ref =>
-        Category ? ref.orderByChild('Category').equalTo(Category) : ref
+        Title ? ref.orderByChild('Title').equalTo('Google') : ref
       ).snapshotChanges()
     );
   }
 
-  filterBy(Category: string|null) {
-    this.size$.next(Category);
+  filterBy(Title: string|null) {
+    this.size$.next(Title);
   }
 }

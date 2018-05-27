@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 div.scrollmenu {
   background-color: white;
   overflow: auto;
+  text-align: center;
   white-space: nowrap;
 }
 .content li {
@@ -35,14 +37,9 @@ ul[_ngcontent-c3] {
 
 div.scrollmenu button {
   display: inline-block;
-  color: white;
   text-align: center;
   padding: 14px;
   text-decoration: none;
-}
-
-div.scrollmenu button:hover {
-  background-color: #777;
 }
 
 ::-webkit-scrollbar
@@ -56,11 +53,10 @@ div.scrollmenu button:hover {
 }
 
 .btn {
-  display: flex;
+  font-family: 'Montserrat', sans-serif;
   overflow: hidden;
-  background: #416dea;
-  padding: 12px 12px;
   cursor: pointer;
+  background: none;
   user-select: none;
   width: 12%;
   transition: all 150ms linear;
@@ -68,13 +64,12 @@ div.scrollmenu button:hover {
   white-space: nowrap;
   text-decoration: none !important;
   text-transform: none;
-  text-transform: capitalize;
 
-  color: #fff;
-  border: 0 none;
+  border: 2px solid black;
+  color: black;
   border-radius: 4px;
 
-  font-size: 13px;
+  font-size: 2vh;
   font-weight: 500;
   line-height: 1.3;
 
@@ -90,7 +85,8 @@ div.scrollmenu button:hover {
 }
 
 .btn:hover, .btn:focus {
-  background-color: #27ae60;
+  background-color: #9ad3de;
+  color: #ffffff;
 }
 
 .btn > * {
