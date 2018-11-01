@@ -30,7 +30,7 @@
     "angularfire2": "^5.0.0-rc.3",
     "annyang": "^2.6.0",
     "core-js": "^2.4.1",
-    "firebase": "^4.6.1",
+    "firebase": "^5.5.7",
     "font-awesome": "^4.7.0",
     "instantsearch.js": "^2.2.2",
     "jshint": "^2.9.5",
