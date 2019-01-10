@@ -29,7 +29,7 @@
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.5",
     "angularfire2": "^5.0.0-rc.3",
     "annyang": "^2.6.0",
-    "core-js": "^2.4.1",
+    "core-js": "^2.6.2",
     "firebase": "^4.6.1",
     "font-awesome": "^4.7.0",
     "instantsearch.js": "^2.2.2",
