@@ -31,6 +31,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FormsModule } from '@angular/forms';
 import { ItemModule } from './items/shared/item.module';
 
+import { NewsApiService } from './news-api.service';
+
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { ItemModule } from './items/shared/item.module';
     NotesModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
+  providers: [NewsApiService],
   bootstrap: [
     AppComponent
   ]

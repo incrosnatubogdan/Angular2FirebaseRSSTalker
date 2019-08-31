@@ -17,6 +17,9 @@ main.column.is-8 {
   transition: 0.3s;
   border-radius: 5px;
 }
+#category0 {
+  display: none;
+}
 p{
   color: #96ACB7;
 }

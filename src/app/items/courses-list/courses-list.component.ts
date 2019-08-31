@@ -1,5 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireAction, AngularFireList  } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subscription } from 'rxjs/Subscription';
@@ -8,6 +8,8 @@ import 'rxjs/add/operator/switchMap';
 import * as firebase from 'firebase';
 import { SpeechService } from '../../shared/speech/speech.service';
 import 'rxjs/add/operator/timeout';
+import { HttpClient } from '@angular/common/http';
+import { NewsApiService } from '../../news-api.service';
 
 
 @Component({
@@ -21,23 +23,99 @@ export class CoursesListComponent {
   items$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
   size$: BehaviorSubject<string|null>;
   waitCommand: boolean;
+  apps: string [];
+  mArticles:Array<any>;
+  mSources:Array<any>;
+  saved$ : any[];
+  uid: string;
+  
 
-  constructor(db: AngularFireDatabase, private speech: SpeechService) {
+  constructor(private db: AngularFireDatabase, private speech: SpeechService, private http: HttpClient, private newsapi:NewsApiService) {
     this.waitCommand = false;
     this.size$ = new BehaviorSubject(null);
+    var user = firebase.auth().currentUser;
+    var uid;
+    uid = user.uid;
+
     this.items$ = this.size$.switchMap(Category =>
-      db.list('/rss', ref =>
-        Category ? ref.orderByChild('Category').equalTo(Category) : ref
+      db.list('/users/'+uid, ref => ref
       ).snapshotChanges()
     );
+    
+    db.list('/users/'+uid+'/saved/'+uid).valueChanges().subscribe(list=> {
+      this.saved$ = list;
+      console.log(list);
+   });
+  }
+  ngOnInit () {
+    this.newsapi.initArticles().subscribe(data => this.mArticles = data['articles']);
+    
   }
 
-  stopSpeaking() {
-    this.waitCommand = true;
+  getInputVal(id){
+    return (<HTMLInputElement>document.getElementById(id)).value;
+  }
+
+  fbkey:string = ''; //global variable
+
+  goToDetails(saved:{},key:string) {
+    this.fbkey = saved[key];  
+    document.getElementById("uform").style.display = "block";
+    console.log(this.uid);
+  }
+
+  add() {
+    var user = firebase.auth().currentUser;
+    var uid;
+    uid = user.uid;
+    firebase.database().ref('/users/'+uid+'/saved').child(uid).push({
+      uid: uid
+    });
+  }
+
+  update(){
+    //Get Values
+    var category1 =this.getInputVal('category1');
+    var category2= this.getInputVal('category2');
+    var category3 =this.getInputVal('category3');
+    var category4= this.getInputVal('category4');
+    var category5 =this.getInputVal('category5');
+    var user = firebase.auth().currentUser;
+    var uid;
+    uid = user.uid;
+    // this.updateF(category1, category2);
+    var ref = firebase.database().ref('/users/'+uid+'/saved');
+    ref.child(uid).update({
+      category1: category1,
+      category2: category2,
+      category3: category3,
+      category4: category4,
+      category5: category5 
+    });
+    console.log(ref)
+  }
+
+  
+
+  updateF(category1, category2){
+    firebase.database().ref('/users/'+this.uid+'/saved'+this.fbkey).set({
+      category1: category1,
+      category2: category2
+    })
+    
+  }
+
+  searchArticles(source){
+    console.log("selected source is: "+source);
+    this.newsapi.getArticlesByID(source).subscribe(data => this.mArticles = data['articles']);
   }
 
   filterBy(Category: string|null) {
     this.size$.next(Category);
+  }
+
+  stopSpeaking() {
+    this.waitCommand = true;
   }
 
   startSpeaking() {
@@ -81,4 +159,8 @@ export class CoursesListComponent {
       .subscribe(() => this.waitCommand = false);
   }
 
+}
+
+export interface Item {
+  name: string;
 }

@@ -1,34 +1,52 @@
 <ul>
     <div class="scrollmenu">
         <button class="btn" (click)="filterBy('')" type="button"><span>All</span></button>
-        <button class="btn" (click)="filterBy('news')" type="button"><span>News</span></button>
-        <button class="btn" (click)="filterBy('politic')" type="button"><span>Politic</span></button>
-        <button class="btn" (click)="filterBy('health')" type="button"><span>Sanatate</span></button>
-        <button class="btn" (click)="filterBy('IT')" type="button"><span>IT</span></button>
-        <button class="btn" (click)="filterBy('sport')" type="button"><span>Sport</span></button>
-        <button class="btn" (click)="filterBy('monden')" type="button"><span>Monden</span></button>
-        <button class="btn" (click)="filterBy('life')" type="button"><span>Life</span></button>
+        <button class="btn" (click)="searchArticles('news')" type="button"><span>News</span></button>
+        <button class="btn" (click)="searchArticles('politic')" type="button"><span>Politic</span></button>
+        <button class="btn" (click)="searchArticles('health')" type="button"><span>Sanatate</span></button>
+        <button class="btn" (click)="searchArticles('IT')" type="button"><span>IT</span></button>
+        <button class="btn" (click)="searchArticles('sport')" type="button"><span>Sport</span></button>
+        <button class="btn" (click)="searchArticles('monden')" type="button"><span>Monden</span></button>
+        <button class="btn" (click)="searchArticles('life')" type="button"><span>Life</span></button>
     </div>
-    <div *ngIf="items$ | async; let items; else loading">
+    
+    <div class="scrollmenu" *ngFor="let source of mSources" hidden>
+        <button class="btn" (click)="searchArticles(source.id);" type="button">
+            <span>{{source.name}}</span>
+        </button>
+    </div>
+    <button class="btn" (click)="add()" type="button">
+            <span>Add</span>
+        </button>
+    <div id="uform" class="col-md-4"  >
+        <input *ngFor = "let saved of saved$ ; let i = index" class="form-control col-md-3" value={{saved}} type="text" placeholder="{{saved}}" id="category{{ i }}"  name="name">
+        <button *ngFor = "let saved of saved$ ; let i = index" class="btn" (click)="searchArticles(saved);" type="button">
+                <span>{{saved}}</span>
+            </button>
+    </div>
+    <button class="btn btn-primary" (click) = update()>Update</button>
+    <div *ngIf="mArticles">
       <div class="scrollmenu">
         <button class="btn" style="margin:2% auto 2% auto; background: #E8C547; " (click)="startSpeaking()" type="button"><i class="fa fa-microphone" aria-hidden="true"> Speak</i></button>
         <button [disabled]="waitCommand" class="btn" style="margin:2% auto 2% auto; background: #E8C547; " (click)="stopSpeaking()" type="button"><i class="fa fa-stop-circle" aria-hidden="true"> Stop</i></button>
 
         <div [hidden]="!waitCommand">Waiting voice commands, say 'more' or 'stop'</div>
       </div>
-        <li *ngFor="let item of items" #courseList>
+        <li *ngFor="let article of mArticles" #courseList>
             <div class="card">
                 <div class="container">
-                    <a href="{{item.payload.val().Link}}" target="_blank">
-                        <h3>{{ item.payload.val().Title }}</h3>
-                        <p>{{ item.payload.val().Description }}</p>
+                    <a href="{{article.url}}" target="_blank">
+                        <img class="img-article" src={{article.urlToImage}} alt="">
+                        <h3>{{article.title}}</h3>
+                        <span>{{article.source.name}}</span>
+                        <p>{{article.description}}</p>
                     </a>
-                    <share-buttons [include]="['facebook', 'twitter', 'whatsapp']" [url]="item.payload.val().Link"></share-buttons>
+                    <!-- <share-buttons [include]="['facebook', 'twitter', 'whatsapp']" [url]="item.payload.val().Link"></share-buttons> -->
                 </div>
             </div>
         </li>
-
-        <div *ngIf="items.length === 0">Niciun rezultat</div>
+        
+        <!-- <div *ngIf="items.length === 0">Niciun rezultat</div> -->
     </div>
     <ng-template #loading>Loading&hellip;</ng-template>
 </ul>
