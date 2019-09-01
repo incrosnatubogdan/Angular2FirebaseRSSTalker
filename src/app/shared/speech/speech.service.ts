@@ -46,4 +46,11 @@ export class SpeechService {
       }
     });
   }
+
+  stop() {
+    const { webkitSpeechRecognition }: IWindow = <IWindow>window;
+    const speechRecognition = new webkitSpeechRecognition();
+    speechRecognition.stop();
+    console.log(123)
+  }
 }

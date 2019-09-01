@@ -28,7 +28,6 @@ export class CoursesListComponent {
   mSources:Array<any>;
   saved$ : any[];
   uid: string;
-  
 
   constructor(private db: AngularFireDatabase, private speech: SpeechService, private http: HttpClient, private newsapi:NewsApiService) {
     this.waitCommand = false;
@@ -36,6 +35,7 @@ export class CoursesListComponent {
     var user = firebase.auth().currentUser;
     var uid;
     uid = user.uid;
+    
 
     this.items$ = this.size$.switchMap(Category =>
       db.list('/users/'+uid, ref => ref
@@ -131,11 +131,10 @@ export class CoursesListComponent {
                   console.log('User may have said:', command);
                   if (command === 'more') {
                     this.speech.speak(description).subscribe(() => observer.complete() );
-                  }
-                  else if (command === 'stop') {
+                  } else if (command === 'stop' || command === 'stop stop' ) {
                     this.waitCommand = true;
-                  }
-                  else {
+                    this.courseList.forEach(elem => elem.nativeElement.style.border = null);
+                  } else {
                     observer.complete();
                   }
                 },

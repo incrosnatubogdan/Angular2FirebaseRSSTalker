@@ -9,47 +9,56 @@
         <button class="btn" (click)="searchArticles('monden')" type="button"><span>Monden</span></button>
         <button class="btn" (click)="searchArticles('life')" type="button"><span>Life</span></button>
     </div>
-    
-    <div class="scrollmenu" *ngFor="let source of mSources" hidden>
-        <button class="btn" (click)="searchArticles(source.id);" type="button">
+    <button class="btn" type="button" (click)="showOptions = !showOptions">
+        <span *ngIf="!showOptions">More Options</span>
+        <span *ngIf="showOptions">Less Options</span>
+    </button>
+    <div class="scrollmenu"  *ngIf="showOptions">
+        <p class="title">Sursele stirilor</p>
+        <button class="btn" *ngFor="let source of mSources" (click)="searchArticles(source.id);" type="button">
             <span>{{source.name}}</span>
         </button>
     </div>
-    <div class="scrollmenu">
+    
+    <div class="scrollmenu" *ngIf="showOptions">
+        <p class="title">Cuvintele tale cheie</p>
         <button *ngFor = "let saved of saved$ ; let i = index" class="btn" (click)="searchArticles(saved);" id="category{{ i }}" type="button">
             <span>{{saved}}</span>
         </button>
-    </div>
-    <button class="btn" (click)="add()" type="button">
-            <span hidden>Add</span>
+        <button class="btn" type="button" (click)="showEdit = !showEdit">
+            <span hidden>Edit Options</span>
         </button>
-    <div id="uform" class="col-md-4"  >
-        <input *ngFor = "let saved of saved$ ; let i = index" class="form-control col-md-3" value={{saved}} type="text" placeholder="{{saved}}" id="category{{ i }}"  name="name">
-        
     </div>
-    <button class="btn btn-primary" (click) = update()>Update</button>
+    <button class="btn" (click)="add()" type="button" hidden>
+        <span hidden>Add</span>
+    </button>
+    <div id="uform" class="col-md-4" *ngIf="showEdit" >
+        <input *ngFor = "let saved of saved$ ; let i = index" class="form-control col-md-3" value={{saved}} type="text" placeholder="{{saved}}" id="category{{ i }}"  name="name">    
+    </div>
+    <button class="btn btn-primary" *ngIf="showEdit"  (click) = update()>Update</button>
     <div *ngIf="mArticles">
-      <div class="scrollmenu">
-        <button class="btn" style="margin:2% auto 2% auto; background: #E8C547; " (click)="startSpeaking()" type="button"><i class="fa fa-microphone" aria-hidden="true"> Speak</i></button>
-        <button [disabled]="waitCommand" class="btn" style="margin:2% auto 2% auto; background: #E8C547; " (click)="stopSpeaking()" type="button"><i class="fa fa-stop-circle" aria-hidden="true"> Stop</i></button>
+      <div class="scrollmenu block">
+        <button class="btn action" (click)="startSpeaking()" type="button"><i class="fa fa-microphone" aria-hidden="true"> Speak</i></button>
+        <button [disabled]="waitCommand" class="btn action" (click)="stopSpeaking()" type="button"><i class="fa fa-stop-circle" aria-hidden="true"> Stop</i></button>
 
         <div [hidden]="!waitCommand">Waiting voice commands, say 'more' or 'stop'</div>
       </div>
-        <li *ngFor="let article of mArticles" #courseList>
-            <div class="card">
-                <div class="container">
-                    <a href="{{article.url}}" target="_blank">
-                        <img class="img-article" src={{article.urlToImage}} alt="">
-                        <div class="text_container">
-                            <h3>{{article.title}}</h3>
-                            <span>{{article.source.name}}</span>
-                            <p>{{article.description}}</p>
-                        </div>
-                    </a>
-                    <!-- <share-buttons [include]="['facebook', 'twitter', 'whatsapp']" [url]="item.payload.val().Link"></share-buttons> -->
-                </div>
+      <div class="card-holder">
+        <div class="card" *ngFor="let article of mArticles" #courseList >
+            <div class="container" *ngIf="article.urlToImage">
+                <a href="{{article.url}}" target="_blank">
+                    <img class="img-article" src={{article.urlToImage}} alt="">
+                    <div class="text_container">
+                        <h3>{{article.title}}</h3>
+                        <span>{{article.source.name}}</span>
+                        <p>{{article.description}}</p>
+                    </div>
+                </a>
+                <!-- <share-buttons [include]="['facebook', 'twitter', 'whatsapp']" [url]="item.payload.val().Link"></share-buttons> -->
             </div>
-        </li>
+        </div>
+      </div>
+            
         
         <!-- <div *ngIf="items.length === 0">Niciun rezultat</div> -->
     </div>
