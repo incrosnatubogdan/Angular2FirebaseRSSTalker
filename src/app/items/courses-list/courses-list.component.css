@@ -13,10 +13,16 @@ main.column.is-8 {
 }
 
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  border-radius: 5px;
+  margin: 20px;
+  background: transparent;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
+
+.card h3 {
+  /* font-size: 50%; */
+}
+
 #category0 {
   display: none;
 }
@@ -29,6 +35,39 @@ h3{
 ul[_ngcontent-c3] {
   margin-left: 0;
   margin-right: 0;
+}
+
+.text_container {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  color: white;
+  height: 100%;
+  display: flex;
+  align-items: self-start;
+  flex-direction: column;
+  justify-content: center;
+  background: #00000045;
+  width: 100%;
+  padding: 10px;
+}
+
+.card .container {
+  padding: 0 !important;
+}
+
+.card .container,
+.card img,
+.card,
+.text_container {
+  border-radius: 10px !important;
+  /* width: fit-content; */
+}
+
+.text_container h3,
+.text_container span,
+.text_container p {
+  color: white;
 }
 
 .card:hover {

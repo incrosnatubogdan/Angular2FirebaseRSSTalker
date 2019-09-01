@@ -49,6 +49,7 @@ export class CoursesListComponent {
   }
   ngOnInit () {
     this.newsapi.initArticles().subscribe(data => this.mArticles = data['articles']);
+    this.newsapi.initSources().subscribe(data => this.mSources = data['sources']);
     
   }
 
@@ -93,16 +94,6 @@ export class CoursesListComponent {
       category5: category5 
     });
     console.log(ref)
-  }
-
-  
-
-  updateF(category1, category2){
-    firebase.database().ref('/users/'+this.uid+'/saved'+this.fbkey).set({
-      category1: category1,
-      category2: category2
-    })
-    
   }
 
   searchArticles(source){

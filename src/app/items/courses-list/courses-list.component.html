@@ -15,14 +15,17 @@
             <span>{{source.name}}</span>
         </button>
     </div>
+    <div class="scrollmenu">
+        <button *ngFor = "let saved of saved$ ; let i = index" class="btn" (click)="searchArticles(saved);" id="category{{ i }}" type="button">
+            <span>{{saved}}</span>
+        </button>
+    </div>
     <button class="btn" (click)="add()" type="button">
-            <span>Add</span>
+            <span hidden>Add</span>
         </button>
     <div id="uform" class="col-md-4"  >
         <input *ngFor = "let saved of saved$ ; let i = index" class="form-control col-md-3" value={{saved}} type="text" placeholder="{{saved}}" id="category{{ i }}"  name="name">
-        <button *ngFor = "let saved of saved$ ; let i = index" class="btn" (click)="searchArticles(saved);" type="button">
-                <span>{{saved}}</span>
-            </button>
+        
     </div>
     <button class="btn btn-primary" (click) = update()>Update</button>
     <div *ngIf="mArticles">
@@ -37,9 +40,11 @@
                 <div class="container">
                     <a href="{{article.url}}" target="_blank">
                         <img class="img-article" src={{article.urlToImage}} alt="">
-                        <h3>{{article.title}}</h3>
-                        <span>{{article.source.name}}</span>
-                        <p>{{article.description}}</p>
+                        <div class="text_container">
+                            <h3>{{article.title}}</h3>
+                            <span>{{article.source.name}}</span>
+                            <p>{{article.description}}</p>
+                        </div>
                     </a>
                     <!-- <share-buttons [include]="['facebook', 'twitter', 'whatsapp']" [url]="item.payload.val().Link"></share-buttons> -->
                 </div>
