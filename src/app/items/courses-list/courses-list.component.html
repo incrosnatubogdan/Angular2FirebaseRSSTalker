@@ -22,26 +22,23 @@
     
     <div class="scrollmenu" *ngIf="showOptions">
         <p class="title">Cuvintele tale cheie</p>
+        <a class="btn" type="button" (click)="goToWatchlist()">
+            <span>Edit Options</span>
+        </a>
         <button *ngFor = "let saved of saved$ ; let i = index" class="btn" (click)="searchArticles(saved);" id="category{{ i }}" type="button">
             <span>{{saved}}</span>
         </button>
-        <button class="btn" type="button" (click)="showEdit = !showEdit">
-            <span hidden>Edit Options</span>
-        </button>
+        
     </div>
     <button class="btn" (click)="add()" type="button" hidden>
-        <span hidden>Add</span>
+        <span>Add</span>
     </button>
-    <div id="uform" class="col-md-4" *ngIf="showEdit" >
-        <input *ngFor = "let saved of saved$ ; let i = index" class="form-control col-md-3" value={{saved}} type="text" placeholder="{{saved}}" id="category{{ i }}"  name="name">    
-    </div>
-    <button class="btn btn-primary" *ngIf="showEdit"  (click) = update()>Update</button>
     <div *ngIf="mArticles">
       <div class="scrollmenu block">
         <button class="btn action" (click)="startSpeaking()" type="button"><i class="fa fa-microphone" aria-hidden="true"> Speak</i></button>
-        <button [disabled]="waitCommand" class="btn action" (click)="stopSpeaking()" type="button"><i class="fa fa-stop-circle" aria-hidden="true"> Stop</i></button>
+        <button class="btn action" (click)="stopSpeaking()" type="button"><i class="fa fa-stop-circle" aria-hidden="true"> Stop</i></button>
 
-        <div [hidden]="!waitCommand">Waiting voice commands, say 'more' or 'stop'</div>
+        <!-- <div [hidden]="!waitCommand">Waiting voice commands, say 'more' or 'stop'</div> -->
       </div>
       <div class="card-holder">
         <div class="card" *ngFor="let article of mArticles" #courseList >

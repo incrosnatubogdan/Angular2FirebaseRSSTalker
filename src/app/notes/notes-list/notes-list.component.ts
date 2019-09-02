@@ -18,19 +18,41 @@ export class NotesListComponent{
 
   items$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
   size$: BehaviorSubject<string|null>;
-
+  saved$ : any[];
 
   constructor(db: AngularFireDatabase) {
-
-    this.size$ = new BehaviorSubject(null);
-    this.items$ = this.size$.switchMap(Title =>
-      db.list('/rss', ref =>
-        Title ? ref.orderByChild('Title').equalTo('Google') : ref
-      ).snapshotChanges()
-    );
+    var user = firebase.auth().currentUser;
+    var uid;
+    uid = user.uid;
+    db.list('/users/'+uid+'/saved/'+uid).valueChanges().subscribe(list=> {
+      this.saved$ = list;
+      console.log(list);
+   });
   }
 
-  filterBy(Title: string|null) {
-    this.size$.next(Title);
+  getInputVal(id){
+    return (<HTMLInputElement>document.getElementById(id)).value;
+  }
+  
+  update(){
+    //Get Values
+    var category1 =this.getInputVal('category1');
+    var category2= this.getInputVal('category2');
+    var category3 =this.getInputVal('category3');
+    var category4= this.getInputVal('category4');
+    var category5 =this.getInputVal('category5');
+    var user = firebase.auth().currentUser;
+    var uid;
+    uid = user.uid;
+    // this.updateF(category1, category2);
+    var ref = firebase.database().ref('/users/'+uid+'/saved');
+    ref.child(uid).update({
+      category1: category1,
+      category2: category2,
+      category3: category3,
+      category4: category4,
+      category5: category5 
+    });
+    console.log(ref)
   }
 }

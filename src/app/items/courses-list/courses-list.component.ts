@@ -10,6 +10,7 @@ import { SpeechService } from '../../shared/speech/speech.service';
 import 'rxjs/add/operator/timeout';
 import { HttpClient } from '@angular/common/http';
 import { NewsApiService } from '../../news-api.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,15 +23,13 @@ export class CoursesListComponent {
 
   items$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
   size$: BehaviorSubject<string|null>;
-  waitCommand: boolean;
   apps: string [];
   mArticles:Array<any>;
   mSources:Array<any>;
   saved$ : any[];
   uid: string;
 
-  constructor(private db: AngularFireDatabase, private speech: SpeechService, private http: HttpClient, private newsapi:NewsApiService) {
-    this.waitCommand = false;
+  constructor(private db: AngularFireDatabase, private speech: SpeechService, private http: HttpClient, private newsapi:NewsApiService, private router: Router) {
     this.size$ = new BehaviorSubject(null);
     var user = firebase.auth().currentUser;
     var uid;
@@ -53,16 +52,11 @@ export class CoursesListComponent {
     
   }
 
+  check:string = ''; //global variable
+  waitCommand: boolean = false;
+
   getInputVal(id){
     return (<HTMLInputElement>document.getElementById(id)).value;
-  }
-
-  fbkey:string = ''; //global variable
-
-  goToDetails(saved:{},key:string) {
-    this.fbkey = saved[key];  
-    document.getElementById("uform").style.display = "block";
-    console.log(this.uid);
   }
 
   add() {
@@ -74,27 +68,10 @@ export class CoursesListComponent {
     });
   }
 
-  update(){
-    //Get Values
-    var category1 =this.getInputVal('category1');
-    var category2= this.getInputVal('category2');
-    var category3 =this.getInputVal('category3');
-    var category4= this.getInputVal('category4');
-    var category5 =this.getInputVal('category5');
-    var user = firebase.auth().currentUser;
-    var uid;
-    uid = user.uid;
-    // this.updateF(category1, category2);
-    var ref = firebase.database().ref('/users/'+uid+'/saved');
-    ref.child(uid).update({
-      category1: category1,
-      category2: category2,
-      category3: category3,
-      category4: category4,
-      category5: category5 
-    });
-    console.log(ref)
+  goToWatchlist() {
+    this.router.navigate(['/notes']);
   }
+  
 
   searchArticles(source){
     console.log("selected source is: "+source);
@@ -106,13 +83,16 @@ export class CoursesListComponent {
   }
 
   stopSpeaking() {
+    this.check = "test";
+    console.log(this.check);
     this.waitCommand = true;
+    this.courseList.forEach(elem => elem.nativeElement.style.border = null);
   }
 
   startSpeaking() {
     this.waitCommand = false;
     this.courseList.forEach(elem => elem.nativeElement.style.border = null);
-
+    // this.check = "test1";
     Observable.of(...this.courseList.toArray())
       .concatMap(elem => {
         elem.nativeElement.style.border = '3px groove rgba(65, 109, 234, 0.5)';
@@ -123,18 +103,25 @@ export class CoursesListComponent {
             .subscribe(() => {
               observer.next();
               this.waitCommand = true;
-
+              if (this.check == "test") {
+                this.waitCommand = true;
+                this.check = "test2";
+                return;
+              }
               this.speech.record().timeout(7000).subscribe(
                 event => {
                   const command = event.results[0][0].transcript;
                   this.waitCommand = false;
+                  console.log('User may have said:', command);
+                  console.log(this.check);
+                  
                   console.log('User may have said:', command);
                   if (command === 'more') {
                     this.speech.speak(description).subscribe(() => observer.complete() );
                   } else if (command === 'stop' || command === 'stop stop' ) {
                     this.waitCommand = true;
                     this.courseList.forEach(elem => elem.nativeElement.style.border = null);
-                  } else {
+                  }  else {
                     observer.complete();
                   }
                 },
@@ -143,6 +130,7 @@ export class CoursesListComponent {
                   observer.complete();
                 }
               )
+              
             });
         });
       })

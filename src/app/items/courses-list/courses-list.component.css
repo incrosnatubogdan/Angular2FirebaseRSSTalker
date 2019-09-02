@@ -38,6 +38,7 @@ main.column.is-8 {
   display: flex;
   height: 300px;
   overflow: hidden;
+  border-radius: 10px !important;
 }
 
 .card-holder {
@@ -93,8 +94,7 @@ ul[_ngcontent-c3] {
 }
 
 .card .container,
-.card img,
-.card,
+.card img
 .text_container {
   border-radius: 10px !important;
   width: fit-content;
