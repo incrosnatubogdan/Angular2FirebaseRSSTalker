@@ -38,7 +38,7 @@
     "jshint": "^2.9.5",
     "lodash": "^4.17.4",
     "mocha": "^4.0.1",
-    "ngx-sharebuttons": "4.1.2",
+    "ngx-sharebuttons": "8.0.0",
     "rxjs": "^5.4.3",
     "zone.js": "^0.8.17"
   },
